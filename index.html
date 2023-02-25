@@ -14,6 +14,8 @@
 
 <body>
     <div id="demo"></div>
+    <br><button onclick="getLocation()">Try It</button>
+    <div id="location"></div>
 
     <script>
         let text = "<p>Browser CodeName: " + navigator.appCodeName + "</p>" +
@@ -24,8 +26,23 @@
             "<p>Browser Online: " + navigator.onLine + "</p>" +
             "<p>Platform: " + navigator.platform + "</p>" +
             "<p>User-agent header: " + navigator.userAgent + "</p>";
+        "<p>Platform: " + navigator.platform + "</p>";
 
         document.getElementById("demo").innerHTML = text;
+        var x = document.getElementById("location");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+        }
     </script>
 </body>
 
